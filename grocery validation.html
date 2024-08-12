@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grocery List and Home Delivery Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    body{
+	background-image:url("g1.png");
+	width:100%;
+	height:100%;
+	background-size:cover;
+	overflow-x:hidden;
+	overflow-y:hidden;
+     }
+
+    fieldset {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    legend {
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+background-color:skyblue;
+      resize: none;
+    }
+
+    button {
+      padding: 10px 60px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+    .jal{
+height:20px;
+right:600px;
+background-color:skyblue;
+margin:-48px;
+position:absolute;
+}
+  </style>
+</head>
+<body>
+  <h1 style="color:blue">GROCERY LIST FOR THE MONTH</h1>
+  <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+    <fieldset>
+      <legend>ENTER YOUR DETAILS</legend>
+      <label for="name">NAME:</label>
+<br>
+      <input class="jal" type="text" id="fname" name="fname" autocomplete="off">
+
+      <label for="address">ADDRESS:</label>
+<br>
+      <input class="jal" type="text" id="address" name="address" autocomplete="off">
+
+      <label for="phone">PHONE:</label>
+<br>
+      <input class="jal" type="text" id="phone" name="phno" autocomplete="off">
+
+      <label for="email">EMAIL:</label>
+<br>
+      <input class="jal" type="text" id="email" name="email" autocomplete="off">
+
+      <label for="pincode">PINCODE:</label>
+<br>
+      <input class="jal" type="text" id="pincode" name="pcode" autocomplete="off">
+<br>
+
+      <legend>GROCERY LIST</legend>
+      <label>
+        <input type="checkbox" name="grocery" value="Milk">
+        Milk
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Bread">
+        Bread
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Eggs">
+        Eggs
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Fruits">
+        Fruits
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Vegetables">
+        Vegetables
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Nuts">
+        Nuts
+      </label>
+      <label>
+        <input type="checkbox" name="grocery" value="Noodles">
+        Noodles
+      </label>
+      <div>
+        <label>Selected Items:</label>
+        <textarea id="selectedItems" readonly></textarea>
+      </div>
+      <br>
+      <br>
+      <br>
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+    </fieldset>
+  </form>
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const textArea = document.getElementById("selectedItems");
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateTextArea);
+    });
+    function updateTextArea() {
+      const selectedItems = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value)
+        .join(', ');
+      textArea.value = selectedItems;
+    }
+function validateForm() {
+  let x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+   let y = document.forms["myForm"]["address"].value;
+    if (y == "") {
+      alert("Address must be filled out");
+      return false;
+  }
+let phone=document.forms["myForm"]["phno"].value;
+    let phlen=phone.length;
+    if(phone==""){
+       alert("enter the phone number");
+       return false;
+    }
+    if(phone.match(/[^0-9]/)){
+       alert("enter only numbers");
+       return false;
+    }
+    if(phlen!=10){
+       alert("enter 10 numbers");
+       return false;
+    }
+        let z = document.forms["myForm"]["email"].value;
+    if(z == "")
+    {
+      alert("enter email");
+      return false;
+    }
+    let pat=/([a-zA-Z0-9])+\@+([a-zA-Z])+\.+([a-z])/;
+    if(!pat.test(z))
+    {
+      alert("enter correct email format");
+      return false;
+    }
+
+     let pincode = document.forms["myForm"]["pincode"].value;
+      if (pincode == "") {
+        alert("Pincode must be filled out");
+        return false;
+  }
+let selectedItems = document.getElementById("selectedItems").value;
+alert("Successfully registered\nNAME:"+x+"\nADDRESS:"+y+"\nPHONE NUMBER:"+phone+"\nEMAIL:"+z+"\nPINCODE:"+pincode+"\nSelected Items:"+selectedItems);
+}
+  </script>
+</body>
+</html>
+
+
+
